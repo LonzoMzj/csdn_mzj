@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/20180402Java/!svn/ver/3335/trunk/g3_csdn/g3_csdn_mzj/src/cn/com/how/service/impl
+END
+FileServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/20180402Java/!svn/ver/3344/trunk/g3_csdn/g3_csdn_mzj/src/cn/com/how/service/impl/FileServiceImpl.java
+END
+ScoreDetailServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/20180402Java/!svn/ver/3335/trunk/g3_csdn/g3_csdn_mzj/src/cn/com/how/service/impl/ScoreDetailServiceImpl.java
+END
+TopicServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/20180402Java/!svn/ver/3335/trunk/g3_csdn/g3_csdn_mzj/src/cn/com/how/service/impl/TopicServiceImpl.java
+END
+UserServiceImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/20180402Java/!svn/ver/3335/trunk/g3_csdn/g3_csdn_mzj/src/cn/com/how/service/impl/UserServiceImpl.java
+END

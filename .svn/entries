@@ -1,0 +1,64 @@
+8
+
+dir
+3226
+https://win-f1jtm90sj9a/svn/20180402Java/trunk/g3_csdn/g3_csdn_mzj
+https://win-f1jtm90sj9a/svn/20180402Java
+
+
+
+2018-07-26T03:59:08.595815Z
+3226
+j0402_mazj
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+acfa5585-532e-7542-a1d8-c5a29e40e232
+
+.classpath
+file
+3335
+
+
+
+2018-07-26T06:16:54.479000Z
+f0630d95ef1b76e3059a615d8620d4f5
+2018-07-30T13:11:59.217417Z
+3335
+j0402_mazj
+
+.project
+file
+
+
+
+
+2018-07-26T03:58:06.526000Z
+f43404021d9d9395635b076ff874e49f
+2018-07-26T03:59:08.595815Z
+3226
+j0402_mazj
+
+.settings
+dir
+
+WebContent
+dir
+
+build
+dir
+
+src
+dir
+

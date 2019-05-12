@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/20180402Java/!svn/ver/3335/trunk/g3_csdn/g3_csdn_mzj/src/config
+END
+db.properties
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/20180402Java/!svn/ver/3335/trunk/g3_csdn/g3_csdn_mzj/src/config/db.properties
+END
+applicationContext-mybatis.xml
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/20180402Java/!svn/ver/3346/trunk/g3_csdn/g3_csdn_mzj/src/config/applicationContext-mybatis.xml
+END
+log4j.properties
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/20180402Java/!svn/ver/3335/trunk/g3_csdn/g3_csdn_mzj/src/config/log4j.properties
+END
+springmvc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/20180402Java/!svn/ver/3335/trunk/g3_csdn/g3_csdn_mzj/src/config/springmvc.xml
+END
