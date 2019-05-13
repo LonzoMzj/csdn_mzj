@@ -15,8 +15,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/index.css" />
 <script type="text/javascript">
-$(function(){
-	
+$(function(){	
 	privilege();
 	//to_page(1);
 	to_page2(1);//利用pageHelper的一览
