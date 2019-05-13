@@ -4,7 +4,7 @@
  <mapper namespace="cn.com.how.mapper.TopicMapper">
  <!-- 查询帖子总数,帖子：评论目标人为空 -->
  <select id="queryCount" resultType="int">
-   select count(1) from g3_csdn_topic_mzj where toId is null
+   select count(1) from csdn_topic_mzj where toId is null
  </select>
  
  <resultMap type="topic" id="topicMap">
@@ -25,53 +25,53 @@
  <!-- 论坛首页的一览 -->
  <select id="queryTopicList" resultMap="topicMap" parameterType="page">
    select t.id, t.topicId,t.fromId,t.title,t.type,t.content,t.date,t.isUp,u.userid,u.userName 
-   from g3_csdn_topic_mzj  t,g3_csdn_user_mzj u
+   from csdn_topic_mzj  t,csdn_user_mzj u
    where t.toId is null and t.fromId = u.userid order by t.isUp desc, t.date desc limit #{start},${10}
  </select>
  
  <!-- 查询详情页面的上方帖子  -->
  <select id="queryThisTopic" resultMap="topicMap" parameterType="integer">
    select t.id, t.topicId,t.fromId,t.title,t.type,t.content,t.date,u.userid,u.userName 
-   from g3_csdn_topic_mzj  t,g3_csdn_user_mzj u
+   from csdn_topic_mzj  t,csdn_user_mzj u
    where t.toId is null and t.fromId = u.userid and t.id=#{id} 
  </select>
  <!-- 查询详情也main下面评论的总数 -->
  <select id="queryThisTopicCommentCount" parameterType="integer" resultType="int">
-   select count(1) from g3_csdn_topic_mzj where topicId=#{topicId}
+   select count(1) from csdn_topic_mzj where topicId=#{topicId}
  </select>
  <!-- 查询详情页面下面的评论 -->
  <select id="queryThisTopicComment" resultMap="topicMap" parameterType="page">
    select t.id, t.topicId,t.fromId,t.title,t.type,t.content,t.date,u.userid,u.userName,u.headImage 
-   from g3_csdn_topic_mzj  t,g3_csdn_user_mzj u
+   from csdn_topic_mzj  t,csdn_user_mzj u
    where topicId=#{topicId} and t.fromId = u.userid order by t.date limit #{start},#{eachPageCount}
  </select>
  
  <!-- 发表帖子  -->
  <insert id="addTopic" parameterType="topic">
-   insert into g3_csdn_topic_mzj (fromId,type,title,content,date) 
+   insert into csdn_topic_mzj (fromId,type,title,content,date) 
    values(#{fromId},#{type},#{title},#{content},now())
  </insert>
  <!-- 发表帖子  增加积分 -->
  <insert id="addTopicScore" parameterType="integer">
-  insert into g3_csdn_scoredetail_mzj (userId,scoreCount,expendTime,scoreSource)
+  insert into csdn_scoredetail_mzj (userId,scoreCount,expendTime,scoreSource)
   values(#{userid},${2},now(),${5})
  </insert>
  
  <!-- 评论帖子 -->
  <insert id="addTopicComment" parameterType="topic">
-  insert into g3_csdn_topic_mzj (topicId,fromId,toId,content,date)
+  insert into csdn_topic_mzj (topicId,fromId,toId,content,date)
   values(#{topicId},#{fromId},#{toId},#{content},now())
  </insert>
  
  <!-- 评论帖子  增加积分 -->
  <insert id="addTopicCommentScore" parameterType="integer">
-   insert into g3_csdn_scoredetail_mzj (userId,scoreCount,expendTime,scoreSource)
+   insert into csdn_scoredetail_mzj (userId,scoreCount,expendTime,scoreSource)
    values(#{userid},${3},now(),${3})
  </insert>
  <!-- 查看评论的评论 -->
  <select id="chakanComment" parameterType="integer" resultMap="topicMap">
    select t.id, t.topicId,t.fromId,t.title,t.type,t.content,t.date,u.userid,u.userName,u.headImage 
-   from g3_csdn_topic_mzj  t,g3_csdn_user_mzj u
+   from csdn_topic_mzj  t,csdn_user_mzj u
    where topicId=#{topicId} and t.fromId = u.userid order by t.date 
  </select>
  </mapper>

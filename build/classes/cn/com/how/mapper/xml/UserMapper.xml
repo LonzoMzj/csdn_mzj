@@ -5,37 +5,37 @@
  <mapper namespace="cn.com.how.mapper.UserMapper">
    <!-- 注册用户    -->
    <insert id="regist" parameterType="user">
-      insert into g3_csdn_user_mzj (userName,password,tel,email,headImage,registTime) values(#{userName},
+      insert into csdn_user_mzj (userName,password,tel,email,headImage,registTime) values(#{userName},
       #{password},#{tel},#{email},#{headImage},now())
    </insert>
    <!-- 注册之后获取用户id,registTime -->
    <select id="selectUser" resultType="user" parameterType="string">
-      select * from g3_csdn_user_mzj where userName=#{userName}
+      select * from csdn_user_mzj where userName=#{userName}
    </select>
    <!-- 注册之后  添加积分20 -->
    <insert id="registScore">
-      insert into g3_csdn_scoredetail_mzj (userid,scoreCount,expendTime,scoreSource)
+      insert into csdn_scoredetail_mzj (userid,scoreCount,expendTime,scoreSource)
       values(#{param1},${20},#{param2},${1})
    </insert>
    
    <!-- 根据电话找回密码   -->
    <update id="findpassByTel" parameterType="user">
-      update g3_csdn_user_mzj set password = #{password} where tel = #{tel}
+      update csdn_user_mzj set password = #{password} where tel = #{tel}
    </update>
    
    <!-- 根据邮箱找回密码   -->
    <update id="findpassByEmail" parameterType="user">
-      update g3_csdn_user_mzj set password = #{password} where email = #{email}
+      update csdn_user_mzj set password = #{password} where email = #{email}
    </update>
  
    <!-- 用户登录  -->
    <select id="login" parameterType="user" resultType="int">
-    select count(1) from g3_csdn_user_mzj where userName=#{userName} and password=#{password}
+    select count(1) from csdn_user_mzj where userName=#{userName} and password=#{password}
    </select>
    
    <!-- 显示资源评论的时候查询各个用户头像 -->
    <select id="selectHead" parameterType="integer" resultType="user">
-     select userName,userid,headImage from g3_csdn_user_mzj where userid=#{userid}
+     select userName,userid,headImage from csdn_user_mzj where userid=#{userid}
    </select>
    
    <!-- 查询积分消费类型占比 -->

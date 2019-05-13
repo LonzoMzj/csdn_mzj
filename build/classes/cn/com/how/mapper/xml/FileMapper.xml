@@ -4,18 +4,18 @@
  <mapper namespace="cn.com.how.mapper.FileMapper">
  <!-- 上传资源文件 -->
  <insert id="addFile" parameterType="fileResource">
-   insert into g3_csdn_file_mzj (fileName,files,fileType,keyWord,score,introduction,uploadDate,fileSize,userid)
+   insert into csdn_file_mzj (fileName,files,fileType,keyWord,score,introduction,uploadDate,fileSize,userid)
    values(#{fileName},#{files},#{fileType},#{keyWord},#{score},#{introduction},now(),#{fileSize},#{userid})
  </insert>
  <!-- 添加上传资源 积分 -->
  <insert id="addUploadScore" parameterType="scoreDetail">
-   insert into g3_csdn_scoredetail_mzj (userid,scoreCount,expendTime,scoreSource)
+   insert into csdn_scoredetail_mzj (userid,scoreCount,expendTime,scoreSource)
    values(#{userid},${8},now(),${2})
  </insert>
  
  <!-- 查询所有上传文件数量 -->
  <select id="queryFile" resultType="int">
-   select count(1) from g3_csdn_file_mzj
+   select count(1) from csdn_file_mzj
  </select>
  <!-- 一个文件对应一个上传的用户 -->
  <resultMap type="fileResource" id="fileMap">
@@ -39,17 +39,17 @@
  </resultMap>
  <!-- 首页文件信息一览 -->
  <select id="queryFileList" parameterType="page" resultMap="fileMap">
-  select u.userName,u.userid,f.fileName,f.fileId,f.fileType,f.uploadDate,f.score from g3_csdn_file_mzj f,
-  g3_csdn_user_mzj u where u.userid=f.userid limit #{start},#{eachPageCount}
+  select u.userName,u.userid,f.fileName,f.fileId,f.fileType,f.uploadDate,f.score from csdn_file_mzj f,
+  csdn_user_mzj u where u.userid=f.userid limit #{start},#{eachPageCount}
  </select>
  <!-- pageHelper查询文件一览 -->
  <select id="queryFileList2" resultMap="fileMap">
-  select u.userName,u.userid,f.fileName,f.fileId,f.fileType,f.uploadDate,f.score from g3_csdn_file_mzj f,
-  g3_csdn_user_mzj u where u.userid=f.userid 
+  select u.userName,u.userid,f.fileName,f.fileId,f.fileType,f.uploadDate,f.score from csdn_file_mzj f,
+  csdn_user_mzj u where u.userid=f.userid 
  </select>
  <!-- 模糊查询 总数量  -->
  <select id="queryFileLike" resultType="int" parameterType="page">
-  select count(1) from g3_csdn_file_mzj 
+  select count(1) from csdn_file_mzj 
   <where>
     <if test="fileName!=null and fileName!=''">
       fileName like concat('%',#{fileName},'%')
@@ -58,8 +58,8 @@
  </select>
  <!-- 模糊查询一览 -->
  <select id="searchLike" parameterType="page" resultMap="fileMap">
-  select u.userName,u.userid,f.fileName,f.fileId,f.fileType,f.uploadDate,f.score from g3_csdn_file_mzj f,
-  g3_csdn_user_mzj u where  u.userid=f.userid
+  select u.userName,u.userid,f.fileName,f.fileId,f.fileType,f.uploadDate,f.score from csdn_file_mzj f,
+  csdn_user_mzj u where  u.userid=f.userid
     <if test="fileName!=null and fileName!=''">
         and f.fileName like concat('%',#{fileName},'%')
     </if>
@@ -70,21 +70,21 @@
  
  <!-- detail页面 查询文件详情 -->
  <select id="queryThisFile" parameterType="integer" resultMap="fileMap">
-    select u.userName,u.userid,f.* from  g3_csdn_file_mzj f,
-     g3_csdn_user_mzj u where fileId=#{fileId} and  u.userid=f.userid
+    select u.userName,u.userid,f.* from  csdn_file_mzj f,
+     csdn_user_mzj u where fileId=#{fileId} and  u.userid=f.userid
  </select>
  <!-- 查平均分 -->
  <select id="queryThisFileGrade" resultType="int" parameterType="integer">
-  select cast(avg(commentGrade) as signed) from g3_csdn_filecomment_mzj 
+  select cast(avg(commentGrade) as signed) from csdn_filecomment_mzj 
   where fileId=#{fileId} and userid != ${0}
  </select>
  <!-- 下载的时候根据id查文件 -->
  <select id="selectFileById" parameterType="integer" resultType="fileResource">
-   select * from g3_csdn_file_mzj where fileId=#{fileId}
+   select * from csdn_file_mzj where fileId=#{fileId}
  </select>
  <!-- 下载次数+1 -->
  <update id="addDownloadCount" parameterType="integer">
-   update g3_csdn_file_mzj set downloadCount=downloadCount+1 where fileId=#{fileId}
+   update csdn_file_mzj set downloadCount=downloadCount+1 where fileId=#{fileId}
  </update>
  
  <!-- 一个评论对应一个发表用户 -->
@@ -104,32 +104,32 @@
  </resultMap>
  <!-- 查询该资源文件评论的总数 -->
  <select id="queryThisFileCommentCount" parameterType="integer" resultType="int">
-  select count(1) from g3_csdn_filecomment_mzj where fileId = #{fileId} and userid != ${0}
+  select count(1) from csdn_filecomment_mzj where fileId = #{fileId} and userid != ${0}
  </select>
  <!-- 查询 该资源文件的评论 -->
  <select id="queryThisFileComment" parameterType="page" resultMap="fileCommentMap">
    select u.userName,u.userid,u.headImage,fc.commentDate,fc.commentContent,fc.commentGrade
-   from g3_csdn_user_mzj u,g3_csdn_filecomment_mzj fc
+   from csdn_user_mzj u,csdn_filecomment_mzj fc
    where u.userid = fc.userid and fileId=#{fileId} order by fc.commentDate desc limit #{start},#{eachPageCount}
  </select>
  
  <!--  发表资源评论  -->
  <insert id="addFileComment" parameterType="fileComment">
-   insert into g3_csdn_filecomment_mzj (fileId,commentDate,commentContent,commentGrade,userid)
+   insert into csdn_filecomment_mzj (fileId,commentDate,commentContent,commentGrade,userid)
    values(#{fileId},now(),#{commentContent},#{commentGrade},#{userid})
  </insert>
  
  <!-- 查看是否已收藏   -->
  <select id="queryIsCollect" resultType="int">
-   select count(1) from g3_csdn_collect_mzj where fileId=#{param1} and userid=#{param2}
+   select count(1) from csdn_collect_mzj where fileId=#{param1} and userid=#{param2}
  </select>
  <!-- 收藏文件   -->
  <insert id="collectThisFile" >
-  insert into g3_csdn_collect_mzj (fileId,userid,collectTime) values(#{param1},#{param2},now())
+  insert into csdn_collect_mzj (fileId,userid,collectTime) values(#{param1},#{param2},now())
  </insert>
  <!-- 我的收藏文件总数量  -->
  <select id="queryCollectCount" resultType="int" parameterType="int">
-   select count(1) from g3_csdn_collect_mzj where userid=#{userid}
+   select count(1) from csdn_collect_mzj where userid=#{userid}
  </select>
  <!-- collectFile为中间连接类 -->
  <resultMap type="collectFile" id="collectFileMap">
@@ -153,18 +153,18 @@
  <!-- 一览收藏文件 -->
  <select id="queryCollectFile" resultMap="collectFileMap" parameterType="page">
     select c.collectTime,f.fileName,f.fileType,f.score,f.uploadDate,f.fileId,
-    u.userid,u.userName from g3_csdn_collect_mzj c,g3_csdn_file_mzj f,g3_csdn_user_mzj u
+    u.userid,u.userName from csdn_collect_mzj c,csdn_file_mzj f,csdn_user_mzj u
     where f.userid=u.userid and c.fileId=f.fileId and c.userid=#{userid} limit #{start},#{eachPageCount}
     
  </select>
  
  <!-- 根据userid和date查询该文件的id -->
  <select id="selectId" resultType="fileResource">
-   select fileId from g3_csdn_file_mzj where files = #{param1} and userid = #{param2}
+   select fileId from csdn_file_mzj where files = #{param1} and userid = #{param2}
  </select>
  <!-- 然后给文件评论表里添加一条数据 -->
  <insert id="addCommentZero" parameterType="integer">
-   insert into g3_csdn_filecomment_mzj (fileId,userid,commentGrade)
+   insert into csdn_filecomment_mzj (fileId,userid,commentGrade)
    values(#{fileId},${0},${0})
  </insert>
  </mapper>
